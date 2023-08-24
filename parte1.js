@@ -1,3 +1,24 @@
+let n = 10
+number:
+for( let i = 2; i<=n; i++){
+for (let a=2; a<i; a++){
+if (i%a ==0 )continue number
+}
+alert(i)
+}
+
+
+
+let number;
+do {
+     number = prompt("Введите пожалуйста число больше 100", 0);
+} while(number <=100 && number);
+
+
+
+
+
+
 for (let i=2; i<=10; i++){
     if (i%2==0)
     alert(i)
@@ -13,6 +34,7 @@ while(i<3){
     alert("number" + i)
     i++
 }
+
 
 
 
