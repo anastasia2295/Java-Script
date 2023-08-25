@@ -1,3 +1,26 @@
+function checkage (age){
+    return (age>18) ? true : confirm("Родители разрешили?");
+}
+
+function checkage2 (age){
+    return (age>18) || conform("Родители разрешили?")   
+    }
+
+
+
+
+    function min (number1, number2){
+        if(number1>number2){
+            return(number2)
+        }else return (number1)
+    }
+
+
+function min2 (number1, number2){
+    return (number1<number2) ? number1 : number2
+}
+
+
 if (browers == "Edge") {
     alert("Your have got the Edge")
 }else if(browers== "Chrome" ||
