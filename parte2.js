@@ -1,3 +1,14 @@
+function ask (question, yes, no){
+    if (confirm (question)) yes()
+ else no()
+}
+ask ("Вы согласны?",
+() => alert("вы согласились"),
+() => alert("Вы отказались"));
+
+
+
+
 function pow (x, n){
     x = prompt("Введите число 1")
     n = prompt("Введите число 2")
