@@ -1,5 +1,6 @@
 const defaltResulit = 0
 let currentResult = defaltResulit
+let logEntries = []
 
 function getUserNumberInput (){
     return parseInt(usrInput.value)
@@ -14,7 +15,8 @@ function add(){
     const initialResult = currentResult
     currentResult += enteredNumber
     createAndWriteOutput("+", initialResult, enteredNumber)
-    
+    logEntries.push(enteredNumber)
+    console.log(logEntries)
 }
 
 function subtract () {
