@@ -26,15 +26,14 @@ let hasBonusLife = true
 adjustHealthBars(chosenMaxLife)
 
 function writeToLog(ev, val, monsterHealth, playerHealth){
-let logEntry 
-if(ev === LOG_EVENT_PLAYER_ATTACK){
-    logEntry = {
-        event: ev,
+let logEntry = {
+    event: ev,
         value: val,
-        target: "MONSTER",
         finalMonsterHealth: monsterHealth,
         finalPlayerHealth: playerHealth
-    }
+}
+if(ev === LOG_EVENT_PLAYER_ATTACK){
+    logEntry.target = "MONSTER"
 } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK){
     logEntry = {
         event: ev,
@@ -81,6 +80,7 @@ function endRound(){
     const initialPlayerLife = currenPlayerHealth
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE)
     currenPlayerHealth -= playerDamage
+    writeToLog(LOG_EVENT_MONSTER_ATTACK, playerDamage, currentMonsterHealth, currenPlayerHealth)
 
     if (currenPlayerHealth <=0 && hasBonusLife){
         hasBonusLife = false
@@ -91,10 +91,13 @@ function endRound(){
 
     if (currentMonsterHealth <=0 && currenPlayerHealth>0){
         alert("You win!")
+        writeToLog(LOG_EVENT_GAME_OVER, "Player win", currentMonsterHealth, currenPlayerHealth)
     }else if(currenPlayerHealth <=0 && currentMonsterHealth>0){
         alert("You lost")
+        writeToLog(LOG_EVENT_GAME_OVER, "Monster win", currentMonsterHealth, currenPlayerHealth)
     }else if(currenPlayerHealth <= 0 && currentMonsterHealth <= 0){
         alert("You have a draw")
+        writeToLog(LOG_EVENT_GAME_OVER, "A draw", currentMonsterHealth, currenPlayerHealth)
 }
 if (currentMonsterHealth <= 0 || currenPlayerHealth <= 0){
     reset()
@@ -103,13 +106,17 @@ if (currentMonsterHealth <= 0 || currenPlayerHealth <= 0){
 
 function attackMonster (mode){
     let maxDamage
+    let logEvent
     if(mode === MODE_ATTACK){
         maxDamage = ATTACK_VALUE
+        logEvent = LOG_EVENT_PLAYER_ATTACK
     }else if (mode === MODE_STRONG_ATTACK){
         maxDamage = STRONG_ATTACK_VALUE
+        logEvent = LOG_EVENT_PLAYER_STRONG_ATTACK
     }
         const demage = dealMonsterDamage(maxDamage)
         currentMonsterHealth -= demage
+        writeToLog(logEvent, demage, currentMonsterHealth, currenPlayerHealth)
         endRound()
         }
     
@@ -130,11 +137,17 @@ function healPlayerHandler(){
     }else {
         healValue = HEAL_VALUE
     }
-    increasePlayerHealth(HEAL_VALUE)
-currenPlayerHealth += HEAL_VALUE
+    increasePlayerHealth(healValue)
+currenPlayerHealth += healValue
+writeToLog(LOG_EVENT_PLAYER_HEAL, healValue, currentMonsterHealth, currenPlayerHealth)
 endRound()
+}
+
+function printLogHandler(){
+    console.log(battleLog)
 }
 
 attackBtn.addEventListener("click", attackHandler)
 strongAttackBtn.addEventListener("click", strongAttackHandler)
 healBtn.addEventListener("click", healPlayerHandler)
+logBtn.addEventListener("click", printLogHandler)
