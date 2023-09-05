@@ -14,6 +14,8 @@ const LOG_EVENT_GAME_OVER = "GAME_OVER"
 const enteredValue = prompt("Максимальное значение жизни", "100")
 let chosenMaxLife = parseInt(enteredValue)
 let battleLog = []
+let lastLoggedEntry
+
 
 if (isNaN(chosenMaxLife) || chosenMaxLife <=0) {
     chosenMaxLife = 100
@@ -201,10 +203,14 @@ while (j<3){
 
 let i = 0
 for (const logEntry of battleLog){
-    console.log(`#${i}`)
+    if(!lastLoggedEntry && lastLoggedEntry !== 0 || lastLoggedEntry === i){
+      console.log(`#${i}`)
     for (const key in logEntry){
-        console.log(`${key} => ${logEntry[key]}`)
+        console.log(`${key} => ${logEntry[key]}`)  
     }
+    lastLoggedEntry = i
+break
+}
     i++
 }
 }
