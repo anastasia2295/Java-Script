@@ -11,14 +11,27 @@ const LOG_EVENT_MONSTER_ATTACK = "MONSTER_ATTACK"
 const LOG_EVENT_PLAYER_HEAL = "PLAYER_HEAL"
 const LOG_EVENT_GAME_OVER = "GAME_OVER"
 
-const enteredValue = prompt("Максимальное значение жизни", "100")
-let chosenMaxLife = parseInt(enteredValue)
+
 let battleLog = []
 let lastLoggedEntry
 
+function getMaxLifeValue (){
+    const enteredValue = prompt("Максимальное значение жизни", "100")
+const parseValue = parseInt(enteredValue)
+if (isNaN(parseValue) || parseValue <=0) {
+    throw {message: "Invalid user input not a number!"}
+}
+return parseValue
+}
 
-if (isNaN(chosenMaxLife) || chosenMaxLife <=0) {
+let chosenMaxLife
+
+try{
+    chosenMaxLife = getMaxLifeValue()
+} catch (error){
+    console.log(error)
     chosenMaxLife = 100
+    alert("You entered something wrong")
 }
 
 let currentMonsterHealth = chosenMaxLife
