@@ -196,10 +196,17 @@ function printLogHandler(){
 //     console.log("----------");
 // }
 let j = 0
-while (j<3){
-    console.log("-------")
-}
-
+outerWhile: do {
+    console.log("outer", j)
+    innerFor: for (let k =0; k<5; k++){
+        if(k===3){
+            break outerWhile
+        }
+        console.log("Inner", k)
+    }
+    j++
+}while (j<3)
+    
 
 let i = 0
 for (const logEntry of battleLog){
