@@ -4,6 +4,11 @@ const backdrop = document.getElementById ("backdrop")
 const cancelAddMovieButton = addMovieModal.querySelector(".btn--passive")
 const confirmAddMovieButton = cancelAddMovieButton.nextElementSibling
 const userInputs = addMovieModal.querySelectorAll("input")
+const modalStart = document.getElementById("entry-text")
+const movieList = document.getElementById("movie-list")
+
+
+
 
 const movies = []
 
@@ -50,11 +55,29 @@ return;
 }
 movies.push(newMovie)
 console.log(movies)
+
 toggleMovieModal()
 clearMovieInput()
+modalStart.style.display="none"
+
+const nodeLi = document.createElement("li")
+movieList.appendChild(nodeLi)
+nodeLi.append(` ${titleValue}  ${imageUrlValue}  ${ratingValue}`)
+// nodeLi.appendChild(document.createTextNode(imageUrlValue))
+// nodeLi.appendChild(document.createTextNode(ratingValue))
+
+// const nodeLi1 = document.createElement("li")
+// movieList.appendChild(nodeLi1)
+// nodeLi1.textContent = titleValue
+//  const nodeLi2 = document.createElement("li")
+//  movieList.appendChild(nodeLi2)
+// nodeLi2.textContent = imageUrlValue
+// const nodeLi3 = document.createElement("li")
+// movieList.appendChild(nodeLi3)
+// nodeLi3.textContent = ratingValue
+//  movieList.classList.add("movie-list") 
+
 }
-
-
 
 
 startAddMovieButton.addEventListener("click", toggleMovieModal) 
