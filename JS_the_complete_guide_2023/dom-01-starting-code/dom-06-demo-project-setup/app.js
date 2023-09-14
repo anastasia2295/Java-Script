@@ -10,6 +10,11 @@ const confirmAddMovieButton = cancelAddMovieButton.nextElementSibling;
 const userInputs = addMovieModal.querySelectorAll('input');
 // const userInputs = addMovieModal.getElementsByTagName('input');
 const entryTextSection = document.getElementById('entry-text');
+const listRoot = document.getElementById('movie-list');
+console.log(listRoot)
+
+
+
 
 const movies = [];
 
@@ -35,6 +40,11 @@ const renderNewMovieElement = (title, imageUrl, rating) => {
   `;
   const listRoot = document.getElementById('movie-list');
   listRoot.append(newMovieElement);
+  const removeMovie = () =>{
+    newMovieElement.innerHTML = ""
+    console.log(listRoot)
+}
+  newMovieElement.addEventListener("click", removeMovie )
 };
 
 const toggleBackdrop = () => {
@@ -91,6 +101,8 @@ const addMovieHandler = () => {
 const backdropClickHandler = () => {
   toggleMovieModal();
 };
+
+
 
 startAddMovieButton.addEventListener('click', toggleMovieModal);
 backdrop.addEventListener('click', backdropClickHandler);
