@@ -11,9 +11,6 @@ const userInputs = addMovieModal.querySelectorAll('input');
 // const userInputs = addMovieModal.getElementsByTagName('input');
 const entryTextSection = document.getElementById('entry-text');
 const listRoot = document.getElementById('movie-list');
-console.log(listRoot)
-
-
 
 
 const movies = [];
@@ -36,16 +33,17 @@ const renderNewMovieElement = (title, imageUrl, rating) => {
     <div class="movie-element__info">
       <h2>${title}</h2>
       <p>${rating}/5 stars</p>
-    </div>
+    </div><div> <button id="delete-li">х</button></div>
   `;
-  const listRoot = document.getElementById('movie-list');
+    const listRoot = document.getElementById('movie-list');
+  const remove = () =>{
+listRoot.removeChild(newMovieElement)
+  const buttonR = document.getElementById("delete-li")
+
   listRoot.append(newMovieElement);
-  const removeMovie = () =>{
-    newMovieElement.innerHTML = ""
-    console.log(listRoot)
-}
-  newMovieElement.addEventListener("click", removeMovie )
-};
+  buttonR.addEventListener("click", remove)
+  }
+ }
 
 const toggleBackdrop = () => {
   backdrop.classList.toggle('visible');
