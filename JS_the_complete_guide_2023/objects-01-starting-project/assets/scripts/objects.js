@@ -5,7 +5,7 @@ const movies = []
 
 const renderMovies = () => {
     const movieList = document.getElementById("movie-list")
-    if(movieList.lenght === 0) {
+    if(movies.lenght === 0) {
         movieList.classList.remove("visible")
         return
     }else {
@@ -15,7 +15,13 @@ const renderMovies = () => {
 
         movies.forEach ((movie) => {
      const movieEl = document.createElement("li")
-     movieEl.textContent = movie.info.title
+     let text = movie.info.title + "-"
+     for (const key in movie.info) {
+        if(key !== "title") {
+            text = text + `${key}: ${movie.info[key]}`;
+        }
+     }
+     movieEl.textContent = text
      movieList.append(movieEl)
         })
 }
